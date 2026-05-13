@@ -9,7 +9,7 @@ public final class VersionChecker {
 
 
     public static void verifyVersion(ServerVersion version, String message) {
-        if (!version.isNewerThanOrEquals(EntityLib.getApi().getPacketEvents().getServerManager().getVersion())) {
+        if (!EntityLib.getApi().getSettings().shouldSkipVersionCheck() && !version.isNewerThanOrEquals(EntityLib.getApi().getPacketEvents().getServerManager().getVersion())) {
             throw new InvalidVersionException(message);
         }
     }
