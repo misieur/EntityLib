@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.monster.raider;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import me.tofaa.entitylib.meta.Metadata;
 
 public class IllusionerMeta extends SpellcasterIllagerMeta {
@@ -7,7 +8,7 @@ public class IllusionerMeta extends SpellcasterIllagerMeta {
     public static final byte OFFSET = SpellcasterIllagerMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 0;
 
-    public IllusionerMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public IllusionerMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 }

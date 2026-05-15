@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.water;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.WaterMobMeta;
@@ -9,8 +10,8 @@ public class AxolotlMeta extends WaterMobMeta {
     public static final byte OFFSET = WaterMobMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 3;
 
-    public AxolotlMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public AxolotlMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public Variant getVariant() {

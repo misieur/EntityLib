@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.projectile;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 
@@ -8,8 +9,8 @@ public class ThrownTridentMeta extends BaseArrowMeta{
     public static final byte OFFSET = BaseArrowMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 2;
 
-    public ThrownTridentMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public ThrownTridentMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public int getLoyaltyLevel() {

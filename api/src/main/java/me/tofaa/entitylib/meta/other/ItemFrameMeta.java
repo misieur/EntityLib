@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.other;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.protocol.item.ItemStack;
 import me.tofaa.entitylib.extras.Rotation;
@@ -15,8 +16,8 @@ public class ItemFrameMeta extends EntityMeta implements ObjectData {
 
     private Orientation orientation = Orientation.DOWN;
 
-    public ItemFrameMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public ItemFrameMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     @NotNull

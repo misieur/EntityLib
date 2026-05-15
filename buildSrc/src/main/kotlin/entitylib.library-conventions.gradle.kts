@@ -13,6 +13,7 @@ repositories {
     mavenCentral()
     maven("https://repo.codemc.io/repository/maven-releases/")
     maven("https://repo.codemc.io/repository/maven-snapshots/")
+    maven("https://repo.viaversion.com")
 }
 
 val isShadow = project.pluginManager.hasPlugin("com.gradleup.shadow")

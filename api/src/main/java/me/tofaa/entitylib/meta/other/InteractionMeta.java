@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.other;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.EntityMeta;
 import me.tofaa.entitylib.meta.Metadata;
@@ -9,8 +10,8 @@ public class InteractionMeta extends EntityMeta {
     public static final byte OFFSET = EntityMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 3;
 
-    public InteractionMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public InteractionMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public float getWidth() {

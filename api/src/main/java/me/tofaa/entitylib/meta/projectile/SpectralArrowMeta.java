@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.projectile;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.ObjectData;
 import me.tofaa.entitylib.meta.types.ProjectileMeta;
@@ -11,8 +12,8 @@ public class SpectralArrowMeta extends BaseArrowMeta implements ProjectileMeta, 
 
     private int shooterId = -1;
 
-    public SpectralArrowMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public SpectralArrowMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     @Override

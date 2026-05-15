@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.types;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 
@@ -14,8 +15,8 @@ public class TameableMeta extends AgeableMeta{
     private final static byte SITTING_BIT = 0x01;
     private final static byte TAMED_BIT = 0x04;
 
-    public TameableMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public TameableMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
 

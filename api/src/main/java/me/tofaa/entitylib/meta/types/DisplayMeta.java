@@ -11,18 +11,10 @@ import me.tofaa.entitylib.meta.Metadata;
 public class DisplayMeta extends EntityMeta {
 
     public static final byte OFFSET = EntityMeta.MAX_OFFSET;
-    public static final byte MAX_OFFSET;
-    static {
-        if (isVersion(ServerVersion.V_1_20_2, VersionComparison.NEWER_THAN_OR_EQUALS)) {
-            MAX_OFFSET =  OFFSET + 15;
-        }
-        else {
-            MAX_OFFSET = OFFSET + 14;
-        }
-    }
+    public final byte MAX_OFFSET = (byte) (isVersion(ServerVersion.V_1_20_2, VersionComparison.NEWER_THAN_OR_EQUALS) ? OFFSET + 15 : OFFSET + 14);
 
-    public DisplayMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public DisplayMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
         isVersionNewer(ServerVersion.V_1_19_3);
     }
 

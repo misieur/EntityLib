@@ -11,8 +11,8 @@ public class ParrotMeta extends TameableMeta {
     public static final byte OFFSET = TameableMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 1;
 
-    public ParrotMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public ParrotMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
         isVersionNewer(ServerVersion.V_1_14);
     }
 

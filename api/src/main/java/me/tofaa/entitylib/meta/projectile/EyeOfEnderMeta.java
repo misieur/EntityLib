@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.projectile;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.item.ItemStack;
 import com.github.retrooper.packetevents.protocol.item.type.ItemTypes;
 import me.tofaa.entitylib.meta.Metadata;
@@ -13,8 +14,8 @@ public class EyeOfEnderMeta extends ItemContainerMeta {
 
     public static final ItemStack EYE_OF_ENDER = ItemStack.builder().type(ItemTypes.ENDER_EYE).build();
 
-    public EyeOfEnderMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata, EYE_OF_ENDER);
+    public EyeOfEnderMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion, EYE_OF_ENDER);
     }
 
 }

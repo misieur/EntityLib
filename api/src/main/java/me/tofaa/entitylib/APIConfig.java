@@ -13,6 +13,7 @@ public final class APIConfig {
     private boolean platformLogger = false;
     private boolean bstats = true;
     private boolean forceBundle = false;
+    private boolean viaVersionCompatibility = false;
 
     public APIConfig(PacketEventsAPI<?> packetEvents) {
         this.packetEvents = packetEvents;
@@ -53,6 +54,13 @@ public final class APIConfig {
         return this;
     }
 
+    public @NotNull APIConfig useViaVersionCompatibility() {
+        this.viaVersionCompatibility = true;
+        if (!ViaVersionBridge.hasViaVersion())
+            throw new IllegalStateException("Using ViaVersion compatibility while ViaVersion API isn't accessible.");
+        return this;
+    }
+
     public boolean isDebugMode() {
         return debugMode;
     }
@@ -81,6 +89,10 @@ public final class APIConfig {
         return this.forceBundle
                 && EntityLib.getOptionalApi().isPresent()
                 && EntityLib.getOptionalApi().get().getPacketEvents().getServerManager().getVersion().isNewerThanOrEquals(ServerVersion.V_1_19_4);
+    }
+
+    public boolean shouldUseViaVersionCompatibility() {
+        return viaVersionCompatibility;
     }
 
 }

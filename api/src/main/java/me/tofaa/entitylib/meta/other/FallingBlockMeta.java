@@ -1,6 +1,7 @@
 package me.tofaa.entitylib.meta.other;
 
 import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.protocol.world.states.WrappedBlockState;
 import com.github.retrooper.packetevents.util.Vector3i;
@@ -15,8 +16,8 @@ public class FallingBlockMeta extends EntityMeta implements ObjectData {
 
     private int blockStateId;
 
-    public FallingBlockMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public FallingBlockMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public Vector3i getSpawnPosition() {
@@ -37,7 +38,7 @@ public class FallingBlockMeta extends EntityMeta implements ObjectData {
     }
 
     public WrappedBlockState getBlockState() {
-        return WrappedBlockState.getByGlobalId(PacketEvents.getAPI().getServerManager().getVersion().toClientVersion(), getBlockStateId());
+        return WrappedBlockState.getByGlobalId(serverVersion.toClientVersion(), getBlockStateId());
     }
 
     public void setBlockState(WrappedBlockState blockState) {

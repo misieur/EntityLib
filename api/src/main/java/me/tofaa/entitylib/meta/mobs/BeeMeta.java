@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.AgeableMeta;
@@ -13,8 +14,8 @@ public class BeeMeta extends AgeableMeta {
     private final static byte HAS_STUNG_BIT = 0x04;
     private final static byte HAS_NECTAR_BIT = 0x08;
 
-    public BeeMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public BeeMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public boolean isAngry() {

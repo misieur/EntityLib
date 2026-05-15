@@ -1,32 +1,34 @@
 package me.tofaa.entitylib.meta.display;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
+import com.github.retrooper.packetevents.manager.server.VersionComparison;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.protocol.item.ItemStack;
 import me.tofaa.entitylib.meta.Metadata;
 
 public class ItemDisplayMeta extends AbstractDisplayMeta {
 
-    public static final byte OFFSET = AbstractDisplayMeta.MAX_OFFSET;
-    public static final byte MAX_OFFSET = offset(OFFSET, 1);
+    public final byte offset = (byte) (isVersion(ServerVersion.V_1_20_2, VersionComparison.NEWER_THAN_OR_EQUALS) ? OFFSET + 15 : OFFSET + 14);
+    public final byte maxOffset = offset(offset, 1);
 
-    public ItemDisplayMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public ItemDisplayMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public ItemStack getItem() {
-        return super.metadata.getIndex(OFFSET, ItemStack.EMPTY);
+        return super.metadata.getIndex(offset, ItemStack.EMPTY);
     }
 
     public void setItem(ItemStack itemStack) {
-        super.metadata.setIndex(OFFSET, EntityDataTypes.ITEMSTACK, itemStack);
+        super.metadata.setIndex(offset, EntityDataTypes.ITEMSTACK, itemStack);
     }
 
     public DisplayType getDisplayType() {
-        return DisplayType.VALUES[super.metadata.getIndex(offset(OFFSET, 1), (byte) 0)];
+        return DisplayType.VALUES[super.metadata.getIndex(offset(offset, 1), (byte) 0)];
     }
 
     public void setDisplayType(DisplayType displayType) {
-        super.metadata.setIndex(offset(OFFSET, 1), EntityDataTypes.BYTE, (byte) displayType.ordinal());
+        super.metadata.setIndex(offset(offset, 1), EntityDataTypes.BYTE, (byte) displayType.ordinal());
     }
 
     public enum DisplayType {

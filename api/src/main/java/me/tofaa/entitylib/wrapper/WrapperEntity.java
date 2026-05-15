@@ -1,5 +1,9 @@
 package me.tofaa.entitylib.wrapper;
 
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
+import com.github.retrooper.packetevents.netty.buffer.ByteBufHelper;
+import com.github.retrooper.packetevents.netty.channel.ChannelHelper;
 import com.github.retrooper.packetevents.protocol.entity.type.EntityType;
 import com.github.retrooper.packetevents.protocol.player.User;
 import com.github.retrooper.packetevents.protocol.world.Location;
@@ -15,7 +19,9 @@ import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerEn
 import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerSetPassengers;
 import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerSpawnEntity;
 import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerSystemChatMessage;
+import com.viaversion.viaversion.api.Via;
 import me.tofaa.entitylib.EntityLib;
+import me.tofaa.entitylib.ViaVersionBridge;
 import me.tofaa.entitylib.container.EntityContainer;
 import me.tofaa.entitylib.meta.EntityMeta;
 import me.tofaa.entitylib.meta.types.ObjectData;
@@ -38,7 +44,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
 
-public class WrapperEntity implements Tickable {
+public class  WrapperEntity implements Tickable {
     private final UUID uuid;
     private final int entityId;
     private final EntityType entityType;
@@ -54,6 +60,7 @@ public class WrapperEntity implements Tickable {
     private final Set<Integer> passengers;
     private EntityContainer parent;
     private final List<ViewerRule> viewerRules;
+    public final ServerVersion serverVersion;
 
     public WrapperEntity(int entityId, UUID uuid, EntityType entityType, EntityMeta entityMeta) {
         this.entityId = entityId;
@@ -66,6 +73,7 @@ public class WrapperEntity implements Tickable {
         this.location = new Location(0, 0, 0, 0, 0);
         this.viewerRules = new CopyOnWriteArrayList<>();
         this.velocity = Vector3d.zero();
+        this.serverVersion = entityMeta.serverVersion;
     }
 
     public WrapperEntity(int entityId, EntityType entityType) {
@@ -80,8 +88,18 @@ public class WrapperEntity implements Tickable {
         this(EntityLib.getPlatform().getEntityUuidProvider().provide(entityType), entityType);
     }
 
+    public WrapperEntity(int entityId, UUID uuid, EntityType entityType, ServerVersion serverVersion) {
+        this(entityId, uuid, entityType, EntityMeta.createMeta(entityId, entityType, serverVersion));
+    }
+
     public WrapperEntity(int entityId, UUID uuid, EntityType entityType) {
-        this(entityId, uuid, entityType, EntityMeta.createMeta(entityId, entityType));
+        this(entityId, uuid, entityType, EntityMeta.createMeta(
+                entityId,
+                entityType,
+                EntityLib.getOptionalApi().isPresent() ?
+                        EntityLib.getApi().getPacketEvents().getServerManager().getVersion() :
+                        PacketEvents.getAPI().getServerManager().getVersion())
+        );
     }
 
     public boolean spawn(Location location, EntityContainer parent) {
@@ -512,7 +530,31 @@ public class WrapperEntity implements Tickable {
         }
     }
 
-    private static void sendPacket(UUID user, PacketWrapper<?> wrapper) {
+    /*
+    // Null means the packet was manually created and wasn't sent by the server itself
+
+        if (buffer == null || ByteBufHelper.refCnt(buffer) == 0) {
+            buffer = ChannelHelper.pooledByteBuf(channel);
+        }
+
+        //On proxies, we must rewrite the packet ID in a format compatible for the targeted client version
+        if (proxy) {
+            User user = PacketEvents.getAPI().getProtocolManager().getUser(channel);
+            if (packetTypeData.getPacketType() == null) {
+                //Get the packet type with the local version packet type mappings.
+                packetTypeData.setPacketType(PacketType.getById(outgoing ? PacketSide.SERVER : PacketSide.CLIENT,
+                        user.getConnectionState(), serverVersion.toClientVersion(), packetTypeData.getNativePacketId()));
+            }
+            //Change local version to user version so that the packet can be processed correctly.
+            serverVersion = user.getClientVersion().toServerVersion();
+            int id = packetTypeData.getPacketType().getId(user.getClientVersion());
+            writeVarInt(id);
+        } else {
+            writeVarInt(packetTypeData.getNativePacketId());
+        }
+        write();
+     */
+    private void sendPacket(UUID user, PacketWrapper<?> wrapper) {
         if (wrapper == null) return;
 
         Object channel = EntityLib.getApi().getPacketEvents().getProtocolManager().getChannel(user);
@@ -527,6 +569,23 @@ public class WrapperEntity implements Tickable {
         // Special handling for entity metadata packets to support `GlobalTranslator` functionality and component rendering
         if (wrapper instanceof WrapperPlayServerEntityMetadata) {
             PacketUtil.renderPacket(user, (WrapperPlayServerEntityMetadata) wrapper);
+        }
+
+        if (EntityLib.getApi().getSettings().shouldUseViaVersionCompatibility() && serverVersion != EntityLib.getApi().getPacketEvents().getServerManager().getVersion()) {
+            // A reference count of 0 means that the packet was freed (it was already sent)
+            wrapper.setServerVersion(serverVersion);
+            wrapper.setClientVersion(serverVersion.toClientVersion());
+
+            if (wrapper.buffer == null || ByteBufHelper.refCnt(wrapper.buffer) == 0) {
+                wrapper.setBuffer(ChannelHelper.pooledByteBuf(channel));
+            }
+
+            int id = wrapper.getPacketTypeData().getPacketType().getId(serverVersion.toClientVersion());
+            wrapper.writeVarInt(id);
+            wrapper.write();
+
+            ViaVersionBridge.sendPacket(user, wrapper);
+            return;
         }
 
         EntityLib.getApi().getPacketEvents().getProtocolManager().sendPacket(channel, wrapper);

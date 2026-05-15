@@ -10,6 +10,7 @@ dependencies {
     compileOnly(libs.bundles.adventure)
     compileOnly(libs.packetevents.api)
     testCompileOnly(libs.packetevents.api)
+    compileOnly(libs.viaversion)
 }
 
 tasks {

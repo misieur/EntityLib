@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.minecart;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 
@@ -8,8 +9,8 @@ public class FurnaceMinecartMeta extends BaseMinecartMeta {
     public static final byte OFFSET = BaseMinecartMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 1;
 
-    public FurnaceMinecartMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public FurnaceMinecartMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public boolean isHasFuel() {

@@ -17,8 +17,8 @@ public class LivingEntityMeta extends EntityMeta {
     private final static byte ACTIVE_HAND_BIT = 0x02;
     private final static byte IS_IN_SPIN_ATTACK_BIT = 0x04;
 
-    public LivingEntityMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public LivingEntityMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
 

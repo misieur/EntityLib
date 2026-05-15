@@ -18,19 +18,19 @@ public class AvatarMeta extends LivingEntityMeta {
     private static final byte RIGHT_LEG_BIT = 0x20;
     private static final byte HAT_BIT = 0x40;
 
-    public AvatarMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public AvatarMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public boolean isRightHandMain() {
-        if (EntityLib.getApi().getPacketEvents().getServerManager().getVersion().isOlderThan(ServerVersion.V_1_9)) {
+        if (serverVersion.isOlderThan(ServerVersion.V_1_9)) {
             return true;
         }
         return super.metadata.getIndex(OFFSET, (byte) 1) == (byte) 1;
     }
 
     public void setRightHandMain(boolean value) {
-        if (EntityLib.getApi().getPacketEvents().getServerManager().getVersion().isOlderThan(ServerVersion.V_1_9)) {
+        if (serverVersion.isOlderThan(ServerVersion.V_1_9)) {
             return;
         }
         super.metadata.setIndex(OFFSET, EntityDataTypes.BYTE, (byte) (value ? 1 : 0));

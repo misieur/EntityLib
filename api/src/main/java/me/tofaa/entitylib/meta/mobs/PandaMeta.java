@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.AgeableMeta;
@@ -15,8 +16,8 @@ public class PandaMeta extends AgeableMeta {
     private final static byte SITTING_BIT = 0x08;
     private final static byte ON_BACK_BIT = 0x10;
 
-    public PandaMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public PandaMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public int getBreedTimer() {

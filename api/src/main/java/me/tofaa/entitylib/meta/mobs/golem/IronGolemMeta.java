@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.golem;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.MobMeta;
 
@@ -10,8 +11,8 @@ public class IronGolemMeta extends MobMeta {
 
     private final static byte PLAYER_CREATED_BIT = 0x01;
 
-    public IronGolemMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public IronGolemMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public boolean isPlayerCreated() {

@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.type.EntityType;
 import me.tofaa.entitylib.meta.display.BlockDisplayMeta;
 import me.tofaa.entitylib.meta.display.ItemDisplayMeta;
@@ -44,7 +45,7 @@ import static com.github.retrooper.packetevents.protocol.entity.type.EntityTypes
 
 final class MetaConverterRegistry {
 
-    private final Map<EntityType, BiFunction<Integer, Metadata, EntityMeta>> converters = new HashMap<>();
+    private final Map<EntityType, NewEntityMetaFunction> converters = new HashMap<>();
     private final Map<EntityType, Class<? extends EntityMeta>> metaClasses = new HashMap<>();
 
     MetaConverterRegistry() {
@@ -179,7 +180,7 @@ final class MetaConverterRegistry {
         put(ZOMBIFIED_PIGLIN, ZombifiedPiglinMeta.class, ZombifiedPiglinMeta::new);
     }
 
-    private void put(EntityType entityType, Class<? extends EntityMeta> metaClass, BiFunction<Integer, Metadata, EntityMeta> function) {
+    private void put(EntityType entityType, Class<? extends EntityMeta> metaClass, NewEntityMetaFunction function) {
         converters.put(entityType, function);
         metaClasses.put(entityType, metaClass);
     }
@@ -188,13 +189,17 @@ final class MetaConverterRegistry {
         return metaClasses.getOrDefault(entityType, EntityMeta.class);
     }
 
-    public @NotNull BiFunction<Integer, Metadata, EntityMeta> get(EntityType entityType) {
+    public @NotNull NewEntityMetaFunction get(EntityType entityType) {
         return converters.getOrDefault(entityType, EntityMeta::new);
     }
 
     public boolean isLivingEntity(EntityType type) {
         Class<? extends EntityMeta> m = getMetaClass(type);
         return LivingEntityMeta.class.isAssignableFrom(m);
+    }
+
+    public interface NewEntityMetaFunction {
+        EntityMeta get(Integer id, Metadata meta, ServerVersion serverVersion);
     }
 
 }

@@ -14,8 +14,8 @@ public class MobMeta extends LivingEntityMeta {
     private final static byte IS_AGGRESSIVE_BIT = 0x04;
 
 
-    public MobMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public MobMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public boolean isNoAi() {
@@ -27,22 +27,22 @@ public class MobMeta extends LivingEntityMeta {
     }
 
     public boolean isLeftHanded() {
-        EntityMeta.isVersionNewer(ServerVersion.V_1_9);
+        isVersionNewer(ServerVersion.V_1_9);
         return getMaskBit(OFFSET, IS_LEFT_HANDED_BIT);
     }
 
     public void setLeftHanded(boolean value) {
-        EntityMeta.isVersionNewer(ServerVersion.V_1_9);
+        isVersionNewer(ServerVersion.V_1_9);
         setMaskBit(OFFSET, IS_LEFT_HANDED_BIT, value);
     }
 
     public boolean isAggressive() {
-        EntityMeta.isVersionNewer(ServerVersion.V_1_14);
+        isVersionNewer(ServerVersion.V_1_14);
         return getMaskBit(OFFSET, IS_AGGRESSIVE_BIT);
     }
 
     public void setAggressive(boolean value) {
-        EntityMeta.isVersionNewer(ServerVersion.V_1_14);
+        isVersionNewer(ServerVersion.V_1_14);
         setMaskBit(OFFSET, IS_AGGRESSIVE_BIT, value);
     }
 

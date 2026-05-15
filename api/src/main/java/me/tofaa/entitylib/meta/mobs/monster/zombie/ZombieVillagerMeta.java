@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.monster.zombie;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.protocol.entity.villager.VillagerData;
 import com.github.retrooper.packetevents.protocol.entity.villager.profession.VillagerProfessions;
@@ -12,8 +13,8 @@ public class ZombieVillagerMeta extends ZombieMeta {
     public static final byte OFFSET = ZombieMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 2;
 
-    public ZombieVillagerMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public ZombieVillagerMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public boolean isConverting() {

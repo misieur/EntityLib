@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.tameable;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.cat.CatVariant;
 import com.github.retrooper.packetevents.protocol.entity.cat.CatVariants;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
@@ -16,8 +17,8 @@ public class CatMeta extends TameableMeta {
 
     private static final DyeColor[] COLORS = DyeColor.values();
 
-    public CatMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public CatMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     @NotNull

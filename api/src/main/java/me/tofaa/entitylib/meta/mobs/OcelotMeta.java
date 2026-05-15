@@ -10,8 +10,8 @@ public class OcelotMeta extends AgeableMeta {
     public static final byte OFFSET = AgeableMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 1;
 
-    public OcelotMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public OcelotMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public boolean isTrusting() {

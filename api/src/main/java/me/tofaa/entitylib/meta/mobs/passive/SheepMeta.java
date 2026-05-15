@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.passive;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.AgeableMeta;
 
@@ -12,8 +13,8 @@ public class SheepMeta extends AgeableMeta {
     private final static byte COLOR_BITS = 0x0F;
     private final static byte SHEARED_BIT = 0x10;
 
-    public SheepMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public SheepMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public int getColor() {

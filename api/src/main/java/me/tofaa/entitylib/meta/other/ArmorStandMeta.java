@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.other;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.util.Vector3f;
 import me.tofaa.entitylib.meta.Metadata;
@@ -16,8 +17,8 @@ public class ArmorStandMeta extends LivingEntityMeta {
     private final static byte HAS_NO_BASE_PLATE_BIT = 0x08;
     private final static byte IS_MARKER_BIT = 0x10;
 
-    public ArmorStandMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public ArmorStandMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public boolean isSmall() {

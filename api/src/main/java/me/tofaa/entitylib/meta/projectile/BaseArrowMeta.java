@@ -13,8 +13,8 @@ public class BaseArrowMeta extends EntityMeta {
     private final static byte CRITICAL_BIT = 0x01;
     private final static byte NO_CLIP_BIT = 0x02;
 
-    public BaseArrowMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public BaseArrowMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public boolean isCritical() {

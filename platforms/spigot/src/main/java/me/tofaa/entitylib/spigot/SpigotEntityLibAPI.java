@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.spigot;
 
+import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.protocol.entity.type.EntityType;
 import io.github.retrooper.packetevents.util.SpigotConversionUtil;
 import me.tofaa.entitylib.APIConfig;
@@ -46,7 +47,13 @@ public class SpigotEntityLibAPI extends AbstractEntityLibAPI<JavaPlugin, BukkitT
         Check.stateCondition(!(platformEntity instanceof Entity), "Entity must be a Bukkit entity");
         Entity e = (Entity) platformEntity;
         EntityType type = SpigotConversionUtil.fromBukkitEntityType(e.getType());
-        EntityMeta meta = EntityMeta.createMeta(e.getEntityId(), type);
+        EntityMeta meta = EntityMeta.createMeta(
+                e.getEntityId(),
+                type,
+                EntityLib.getOptionalApi().isPresent() ?
+                        EntityLib.getApi().getPacketEvents().getServerManager().getVersion() :
+                        PacketEvents.getAPI().getServerManager().getVersion()
+        );
         meta.setHasNoGravity(!e.hasGravity());
         meta.setCustomNameVisible(e.isCustomNameVisible());
         String customName = e.getCustomName();

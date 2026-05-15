@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.projectile;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.EntityMeta;
 import me.tofaa.entitylib.meta.Metadata;
@@ -13,8 +14,8 @@ public class WitherSkullMeta extends EntityMeta implements ObjectData, Projectil
 
     private int shooter = -1;
 
-    public WitherSkullMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public WitherSkullMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
 

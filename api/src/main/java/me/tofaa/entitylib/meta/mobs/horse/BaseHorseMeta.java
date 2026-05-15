@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.horse;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.AgeableMeta;
 
@@ -15,8 +16,8 @@ public abstract class BaseHorseMeta extends AgeableMeta {
     private final static byte REARING_BIT = 0x20;
     private final static byte MOUTH_OPEN_BIT = 0x40;
 
-    protected BaseHorseMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    protected BaseHorseMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public boolean isTamed() {

@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.AgeableMeta;
@@ -10,8 +11,8 @@ public class GoatMeta extends AgeableMeta {
     public static final byte MAX_OFFSET = OFFSET + 1;
 
 
-    public GoatMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public GoatMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public boolean isScreaming() {

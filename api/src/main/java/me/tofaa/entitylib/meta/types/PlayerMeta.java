@@ -11,8 +11,8 @@ public class PlayerMeta extends AvatarMeta {
     public static final byte OFFSET = AvatarMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 4;
 
-    public PlayerMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public PlayerMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public float getAdditionalHearts() {

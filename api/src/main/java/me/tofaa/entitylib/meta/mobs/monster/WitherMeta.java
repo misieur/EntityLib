@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.monster;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.MobMeta;
@@ -13,8 +14,8 @@ public class WitherMeta extends MobMeta {
     private int leftHead = -1;
     private int rightHead = -1;
 
-    public WitherMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public WitherMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public void setCenterHead(int centerHead) {

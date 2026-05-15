@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.monster.piglin;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.MobMeta;
@@ -9,8 +10,8 @@ public abstract class BasePiglinMeta extends MobMeta {
     public static final byte OFFSET = MobMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 1;
 
-    protected BasePiglinMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    protected BasePiglinMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public boolean isImmuneToZombification() {

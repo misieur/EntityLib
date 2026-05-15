@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.other;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.util.Vector3i;
 import me.tofaa.entitylib.meta.EntityMeta;
@@ -13,8 +14,8 @@ public class EndCrystalMeta extends EntityMeta {
     public static final byte OFFSET = EntityMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 2;
 
-    public EndCrystalMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public EndCrystalMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public @Nullable Optional<Vector3i> getBeamTarget() {

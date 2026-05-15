@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.wrapper;
 
+import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.type.EntityType;
 import com.github.retrooper.packetevents.protocol.nbt.NBTCompound;
@@ -30,8 +31,19 @@ public class WrapperLivingEntity extends WrapperEntity {
         this.potionEffect = new WrapperEntityPotionEffect(this);
     }
 
+    public WrapperLivingEntity(int entityId, UUID uuid, EntityType entityType, ServerVersion serverVersion) {
+        this(entityId, uuid, entityType, EntityMeta.createMeta(entityId, entityType, serverVersion));
+    }
+
     public WrapperLivingEntity(int entityId, UUID uuid, EntityType entityType) {
-        this(entityId, uuid, entityType, EntityMeta.createMeta(entityId, entityType));
+        this(
+                entityId,
+                uuid,
+                entityType,
+                EntityLib.getOptionalApi().isPresent() ?
+                        EntityLib.getApi().getPacketEvents().getServerManager().getVersion() :
+                        PacketEvents.getAPI().getServerManager().getVersion()
+        );
     }
 
     public WrapperLivingEntity(int entityId, EntityType entityType) {

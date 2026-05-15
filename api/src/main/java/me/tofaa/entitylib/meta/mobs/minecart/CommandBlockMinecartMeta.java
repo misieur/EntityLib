@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.minecart;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 import net.kyori.adventure.text.Component;
@@ -11,8 +12,8 @@ public class CommandBlockMinecartMeta extends BaseMinecartMeta{
     public static final byte OFFSET = BaseMinecartMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 2;
 
-    public CommandBlockMinecartMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public CommandBlockMinecartMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public @NotNull String getCommand() {

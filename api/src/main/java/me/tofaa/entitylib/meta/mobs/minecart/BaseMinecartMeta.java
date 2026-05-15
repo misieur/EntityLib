@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.minecart;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.EntityMeta;
 import me.tofaa.entitylib.meta.Metadata;
@@ -10,8 +11,8 @@ public abstract class BaseMinecartMeta extends EntityMeta implements ObjectData 
     public static final byte OFFSET = EntityMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 6;
 
-    protected BaseMinecartMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    protected BaseMinecartMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public int getShakingPower() {

@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.MobMeta;
 
@@ -10,8 +11,8 @@ public class BatMeta extends MobMeta {
 
     private final static byte IS_HANGING_BIT = 0x01;
 
-    public BatMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public BatMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public boolean isHanging() {

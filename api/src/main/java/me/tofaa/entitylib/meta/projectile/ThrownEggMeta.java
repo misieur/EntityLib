@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.projectile;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.item.ItemStack;
 import com.github.retrooper.packetevents.protocol.item.type.ItemTypes;
 import me.tofaa.entitylib.meta.Metadata;
@@ -13,8 +14,8 @@ public class ThrownEggMeta extends ItemContainerMeta {
 
     private static final ItemStack EGG = ItemStack.builder().type(ItemTypes.EGG).build();
 
-    public ThrownEggMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata, EGG);
+    public ThrownEggMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion, EGG);
     }
 
 }

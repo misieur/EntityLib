@@ -1,5 +1,7 @@
 package me.tofaa.entitylib.wrapper;
 
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.type.EntityType;
 import com.github.retrooper.packetevents.protocol.world.Location;
 import com.github.retrooper.packetevents.util.Vector3d;
@@ -18,8 +20,19 @@ public class WrapperExperienceOrbEntity extends WrapperEntity {
         super(entityId, uuid, entityType, meta);
     }
 
+    public WrapperExperienceOrbEntity(int entityId, @NotNull UUID uuid, EntityType entityType, ServerVersion serverVersion) {
+        this(entityId, uuid, entityType, EntityMeta.createMeta(entityId, entityType, serverVersion));
+    }
+
     public WrapperExperienceOrbEntity(int entityId, @NotNull UUID uuid, EntityType entityType) {
-        this(entityId, uuid, entityType, EntityMeta.createMeta(entityId, entityType));
+        this(
+                entityId,
+                uuid,
+                entityType,
+                EntityLib.getOptionalApi().isPresent() ?
+                        EntityLib.getApi().getPacketEvents().getServerManager().getVersion() :
+                        PacketEvents.getAPI().getServerManager().getVersion()
+        );
     }
 
     public WrapperExperienceOrbEntity(int entityId, EntityType entityType) {

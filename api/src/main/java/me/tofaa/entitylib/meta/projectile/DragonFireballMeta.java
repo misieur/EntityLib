@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.projectile;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import me.tofaa.entitylib.meta.EntityMeta;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.ObjectData;
@@ -12,8 +13,8 @@ public class DragonFireballMeta extends EntityMeta implements ProjectileMeta, Ob
 
     private int shooter = -1;
 
-    public DragonFireballMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public DragonFireballMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     @Override

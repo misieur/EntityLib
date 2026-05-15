@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.other;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.MobMeta;
@@ -11,8 +12,8 @@ public class EnderDragonMeta extends MobMeta {
     public static final byte MAX_OFFSET = OFFSET + 0;
 
 
-    public EnderDragonMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public EnderDragonMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     @NotNull

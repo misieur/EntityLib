@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.other;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.protocol.item.ItemStack;
 import me.tofaa.entitylib.meta.EntityMeta;
@@ -15,8 +16,8 @@ public class FireworkRocketMeta extends EntityMeta implements ProjectileMeta {
 
     private int shooter = -1;
 
-    public FireworkRocketMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public FireworkRocketMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public ItemStack getFireworkItem() {

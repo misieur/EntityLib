@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.projectile;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.item.ItemStack;
 import com.github.retrooper.packetevents.protocol.item.type.ItemTypes;
 import me.tofaa.entitylib.meta.Metadata;
@@ -17,8 +18,8 @@ public class SmallFireballMeta extends ItemContainerMeta implements ObjectData, 
 
     private int shooterId = -1;
 
-    public SmallFireballMeta(int entityId, Metadata meta) {
-        super(entityId, meta, SMALL_FIREBALL);
+    public SmallFireballMeta(int entityId, Metadata meta, ServerVersion serverVersion) {
+        super(entityId, meta, serverVersion, SMALL_FIREBALL);
     }
 
     @Override

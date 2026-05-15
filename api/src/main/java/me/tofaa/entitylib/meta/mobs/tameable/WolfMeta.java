@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.tameable;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.protocol.entity.wolfvariant.WolfVariant;
 import com.github.retrooper.packetevents.protocol.entity.wolfvariant.WolfVariants;
@@ -13,8 +14,8 @@ public class WolfMeta extends TameableMeta {
     public static final byte OFFSET = TameableMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 5;
 
-    public WolfMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public WolfMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     @NotNull

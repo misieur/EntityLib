@@ -7,6 +7,7 @@ paper = "1.21-R0.1-SNAPSHOT"
 velocity = "3.4.0-SNAPSHOT"
 run-paper = "3.0.2"
 javapoet = "1.13.0"
+viaversion = "5.4.2-SNAPSHOT"
 
 [libraries]
 adventure-api = { group = "net.kyori", name = "adventure-api", version.ref = "adventure" }
@@ -22,6 +23,7 @@ packetevents-velocity = { group = "com.github.retrooper", name = "packetevents-v
 paper = { group = "io.papermc.paper", name = "paper-api", version.ref = "paper" }
 velocity = { group = "com.velocitypowered", name = "velocity-api", version.ref = "velocity" }
 javapoet = { group = "com.squareup", name = "javapoet", version.ref = "javapoet" }
+viaversion = { group = "com.viaversion", name = "viaversion-api", version.ref = "viaversion" }
 
 [bundles]
 adventure = ["adventure-api", "adventure-text-serializer-gson", "adventure-text-serializer-legacy", "adventure-nbt"]

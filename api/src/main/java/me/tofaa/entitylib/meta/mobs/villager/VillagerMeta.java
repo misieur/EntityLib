@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.villager;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.protocol.entity.villager.VillagerData;
 import com.github.retrooper.packetevents.protocol.entity.villager.profession.VillagerProfession;
@@ -45,8 +46,8 @@ public class VillagerMeta extends BaseVillagerMeta {
             VillagerProfessions.WEAPONSMITH
     };
 
-    public VillagerMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public VillagerMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     @NotNull

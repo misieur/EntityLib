@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.water;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 
@@ -8,8 +9,8 @@ public class PufferFishMeta extends BaseFishMeta {
     public static final byte OFFSET = BaseFishMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 1;
 
-    public PufferFishMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public PufferFishMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public State getState() {

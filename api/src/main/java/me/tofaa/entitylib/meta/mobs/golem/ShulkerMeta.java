@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.golem;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.color.DyeColor;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.protocol.world.Direction;
@@ -14,8 +15,8 @@ public class ShulkerMeta extends MobMeta {
     private static final DyeColor[] DYE_COLORS = DyeColor.values();
 
 
-    public ShulkerMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public ShulkerMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public Direction getAttachFace() {

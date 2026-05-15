@@ -4,7 +4,7 @@ import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.manager.server.VersionComparison;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityData;
-import com.github.retrooper.packetevents.protocol.entity.data.EntityDataType;
+import com.github.retrooper.packetevents.protocol.entity.data.EntityDataType;import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityMetadataProvider;
 import com.github.retrooper.packetevents.protocol.entity.pose.EntityPose;
@@ -23,9 +23,11 @@ import java.util.function.BiFunction;
 
 public class EntityMeta implements EntityMetadataProvider {
 
+    public final ServerVersion serverVersion;
+
     static final MetaConverterRegistry META_CONVERTER_REGISTRY = new MetaConverterRegistry();
 
-    public static @NotNull BiFunction<Integer, Metadata, EntityMeta> getConverter(EntityType entityType) {
+    public static @NotNull MetaConverterRegistry.NewEntityMetaFunction getConverter(EntityType entityType) {
         return META_CONVERTER_REGISTRY.get(entityType);
     }
 
@@ -37,10 +39,10 @@ public class EntityMeta implements EntityMetadataProvider {
         return META_CONVERTER_REGISTRY.isLivingEntity(type);
     }
 
-    public static @NotNull EntityMeta createMeta(int entityId, EntityType entityType) {
+    public static @NotNull EntityMeta createMeta(int entityId, EntityType entityType, ServerVersion serverVersion) {
         Metadata metadata = new Metadata(entityId);
-        BiFunction<Integer, Metadata, EntityMeta> converter = getConverter(entityType);
-        return converter.apply(entityId, metadata);
+        MetaConverterRegistry.NewEntityMetaFunction converter = getConverter(entityType);
+        return converter.get(entityId, metadata, serverVersion);
     }
 
     public static final byte OFFSET = 0;
@@ -57,18 +59,25 @@ public class EntityMeta implements EntityMetadataProvider {
     protected final int entityId;
     protected final Metadata metadata;
 
-    public EntityMeta(int entityId, Metadata metadata) {
+    public EntityMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
         this.entityId = entityId;
         this.metadata = metadata;
+        this.serverVersion = serverVersion;
     }
 
     public EntityMeta(EntityMeta other) {
-        this(other.entityId, new Metadata(other.entityId));
+        this(other.entityId, new Metadata(other.entityId), other.serverVersion);
         metadata.setMetaFromPacket(other.createPacket());
     }
 
     public EntityMeta(int entityId) {
-        this(entityId, new Metadata(entityId));
+        this(
+                entityId,
+                new Metadata(entityId),
+                EntityLib.getOptionalApi().isPresent() ?
+                    EntityLib.getApi().getPacketEvents().getServerManager().getVersion() :
+                    PacketEvents.getAPI().getServerManager().getVersion()
+        );
     }
 
     public void setNotifyAboutChanges(boolean notifyAboutChanges) {
@@ -204,30 +213,18 @@ public class EntityMeta implements EntityMetadataProvider {
         return metadata.createPacket();
     }
 
-    protected static void isVersionNewer(ServerVersion version) {
-        if (EntityLib.getOptionalApi().isPresent()) {
-            if (!EntityLib.getApi().getPacketEvents().getServerManager().getVersion().is(VersionComparison.NEWER_THAN, version)) {
-                throw new InvalidVersionException("This method is only available for versions newer than " + version.name() + ".");
-            }
-        }
-        if (!PacketEvents.getAPI().getServerManager().getVersion().is(VersionComparison.NEWER_THAN, version)) {
+    protected void isVersionNewer(ServerVersion version) {
+        if (!serverVersion.is(VersionComparison.NEWER_THAN, version)) {
             throw new InvalidVersionException("This method is only available for versions newer than " + version.name() + ".");
         }
     }
 
-    protected static boolean isVersion(ServerVersion version, VersionComparison comparison) {
-        if (EntityLib.getOptionalApi().isPresent()) {
-
-            return EntityLib.getApi().getPacketEvents().getServerManager().getVersion().is(comparison, version);
-        }
-        return PacketEvents.getAPI().getServerManager().getVersion().is(comparison, version);
+    protected boolean isVersion(ServerVersion version, VersionComparison comparison) {
+        return serverVersion.is(comparison, version);
     }
 
-    protected static boolean isVersion(ServerVersion version) {
-        if (EntityLib.getOptionalApi().isPresent()) {
-            return EntityLib.getApi().getPacketEvents().getServerManager().getVersion().is(VersionComparison.EQUALS, version);
-        }
-        return PacketEvents.getAPI().getServerManager().getVersion().is(VersionComparison.EQUALS, version);
+    protected boolean isVersion(ServerVersion version) {
+        return serverVersion.is(VersionComparison.EQUALS, version);
     }
 
     /**

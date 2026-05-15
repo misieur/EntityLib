@@ -1,6 +1,7 @@
 package me.tofaa.entitylib.meta.mobs.monster;
 
 import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.protocol.world.states.WrappedBlockState;
 import me.tofaa.entitylib.meta.Metadata;
@@ -13,8 +14,8 @@ public class EndermanMeta extends MobMeta {
     public static final byte OFFSET = MobMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 3;
 
-    public EndermanMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public EndermanMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public Integer getCarriedBlockID() {
@@ -28,7 +29,7 @@ public class EndermanMeta extends MobMeta {
     public WrappedBlockState getCarriedBlockState() {
         Integer carriedBlockID = getCarriedBlockID();
         if (carriedBlockID == null) return null;
-        return WrappedBlockState.getByGlobalId(PacketEvents.getAPI().getServerManager().getVersion().toClientVersion(), carriedBlockID);
+        return WrappedBlockState.getByGlobalId(serverVersion.toClientVersion(), carriedBlockID);
     }
 
     public void setCarriedBlockState(WrappedBlockState blockState) {

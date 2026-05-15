@@ -10,8 +10,8 @@ public class PigMeta extends AgeableMeta {
     public static final byte OFFSET = AgeableMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 2;
 
-    public PigMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public PigMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public boolean hasSaddle() {

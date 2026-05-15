@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.projectile;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.ObjectData;
@@ -12,8 +13,8 @@ public class ArrowMeta extends BaseArrowMeta implements ProjectileMeta, ObjectDa
 
     private int shooterId = -1;
 
-    public ArrowMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public ArrowMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public int getColor() {

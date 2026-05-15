@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.projectile;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.item.ItemStack;
 import com.github.retrooper.packetevents.protocol.item.type.ItemTypes;
 import me.tofaa.entitylib.meta.Metadata;
@@ -12,8 +13,8 @@ public class ThrownExpBottleMeta extends ItemContainerMeta {
 
     private static final ItemStack EXP_BOTTLE = ItemStack.builder().type(ItemTypes.EXPERIENCE_BOTTLE).build();
 
-    public ThrownExpBottleMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata, EXP_BOTTLE);
+    public ThrownExpBottleMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion, EXP_BOTTLE);
     }
 
 }

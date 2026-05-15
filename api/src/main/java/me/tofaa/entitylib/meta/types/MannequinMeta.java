@@ -14,8 +14,8 @@ public class MannequinMeta extends AvatarMeta {
     public static final byte OFFSET = AvatarMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 3;
 
-    public MannequinMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public MannequinMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
         isVersionNewer(ServerVersion.V_1_21_8);
     }
 

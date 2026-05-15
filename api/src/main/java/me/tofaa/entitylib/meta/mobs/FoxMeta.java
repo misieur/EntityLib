@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 import me.tofaa.entitylib.meta.types.AgeableMeta;
@@ -23,8 +24,8 @@ public class FoxMeta extends AgeableMeta {
     private final static byte DEFENDING_BIT = (byte) 0x80;
 
 
-    public FoxMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public FoxMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     @NotNull

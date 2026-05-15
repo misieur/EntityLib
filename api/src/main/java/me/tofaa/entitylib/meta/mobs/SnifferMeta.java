@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.protocol.entity.sniffer.SnifferState;
 import me.tofaa.entitylib.meta.Metadata;
@@ -10,8 +11,8 @@ public class SnifferMeta extends AgeableMeta {
     public static final byte OFFSET = AgeableMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 1;
 
-    public SnifferMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public SnifferMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public SnifferState getState() {

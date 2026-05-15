@@ -1,5 +1,7 @@
 package me.tofaa.entitylib.wrapper;
 
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.type.EntityType;
 import me.tofaa.entitylib.EntityLib;
 import me.tofaa.entitylib.meta.EntityMeta;
@@ -30,8 +32,19 @@ public class WrapperEntityCreature extends WrapperLivingEntity {
         this.aiGroups = new HashSet<>();
     }
 
+    public WrapperEntityCreature(int entityId, @NotNull UUID uuid, EntityType entityType, ServerVersion serverVersion) {
+        this(entityId, uuid, entityType, EntityMeta.createMeta(entityId, entityType, serverVersion));
+    }
+
     public WrapperEntityCreature(int entityId, @NotNull UUID uuid, EntityType entityType) {
-        this(entityId, uuid, entityType, EntityMeta.createMeta(entityId, entityType));
+        this(
+                entityId,
+                uuid,
+                entityType,
+                EntityLib.getOptionalApi().isPresent() ?
+                        EntityLib.getApi().getPacketEvents().getServerManager().getVersion() :
+                        PacketEvents.getAPI().getServerManager().getVersion()
+        );
     }
 
     public WrapperEntityCreature(int entityId, EntityType entityType) {

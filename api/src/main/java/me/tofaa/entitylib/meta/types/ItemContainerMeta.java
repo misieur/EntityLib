@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.types;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.protocol.item.ItemStack;
 import me.tofaa.entitylib.meta.EntityMeta;
@@ -11,8 +12,8 @@ public abstract class ItemContainerMeta extends EntityMeta {
 
     private final ItemStack baseItem;
 
-    public ItemContainerMeta(int entityId, Metadata metadata, ItemStack baseItem) {
-        super(entityId, metadata);
+    public ItemContainerMeta(int entityId, Metadata metadata, ServerVersion serverVersion, ItemStack baseItem) {
+        super(entityId, metadata, serverVersion);
         this.baseItem = baseItem;
     }
 

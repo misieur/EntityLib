@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.other;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.world.Direction;
 import com.github.retrooper.packetevents.protocol.world.PaintingType;
 import me.tofaa.entitylib.meta.EntityMeta;
@@ -19,8 +20,8 @@ public class PaintingMeta extends EntityMeta {
     private Direction direction = Direction.SOUTH;
     private Type type = Type.KEBAB;
 
-    public PaintingMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public PaintingMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     @NotNull

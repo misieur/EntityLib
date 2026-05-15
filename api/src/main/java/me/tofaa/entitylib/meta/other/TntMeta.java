@@ -1,6 +1,6 @@
 package me.tofaa.entitylib.meta.other;
 
-import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import com.github.retrooper.packetevents.protocol.world.states.WrappedBlockState;
 import com.github.retrooper.packetevents.protocol.world.states.type.StateTypes;
@@ -11,8 +11,8 @@ public class TntMeta extends EntityMeta {
     public static final byte OFFSET = EntityMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 2;
 
-    public TntMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public TntMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     public int getFuseTime() {
@@ -32,7 +32,7 @@ public class TntMeta extends EntityMeta {
     }
 
     public WrappedBlockState getBlockState() {
-        return WrappedBlockState.getByGlobalId(PacketEvents.getAPI().getServerManager().getVersion().toClientVersion(), getBlockData());
+        return WrappedBlockState.getByGlobalId(serverVersion.toClientVersion(), getBlockData());
     }
 
     public void setBlockState(WrappedBlockState blockState) {

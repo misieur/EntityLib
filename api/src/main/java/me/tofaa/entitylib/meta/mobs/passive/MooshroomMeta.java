@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.meta.mobs.passive;
 
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.data.EntityDataTypes;
 import me.tofaa.entitylib.meta.Metadata;
 import org.jetbrains.annotations.NotNull;
@@ -11,8 +12,8 @@ public class MooshroomMeta extends CowMeta{
     public static final byte OFFSET = CowMeta.MAX_OFFSET;
     public static final byte MAX_OFFSET = OFFSET + 1;
 
-    public MooshroomMeta(int entityId, Metadata metadata) {
-        super(entityId, metadata);
+    public MooshroomMeta(int entityId, Metadata metadata, ServerVersion serverVersion) {
+        super(entityId, metadata, serverVersion);
     }
 
     @NotNull

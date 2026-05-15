@@ -1,5 +1,6 @@
 package me.tofaa.entitylib.wrapper;
 
+import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.protocol.entity.type.EntityTypes;
 import com.github.retrooper.packetevents.protocol.player.GameMode;
@@ -30,14 +31,24 @@ public class WrapperPlayer extends WrapperLivingEntity {
     private boolean tablist = true;
     private int latency = -1;
 
-    public WrapperPlayer(UserProfile profile, int entityId) {
-        super(entityId, profile.getUUID(), EntityTypes.PLAYER, EntityMeta.createMeta(entityId, EntityTypes.PLAYER));
+    public WrapperPlayer(UserProfile profile, int entityId, ServerVersion serverVersion) {
+        super(entityId, profile.getUUID(), EntityTypes.PLAYER, EntityMeta.createMeta(entityId, EntityTypes.PLAYER, serverVersion));
         this.profile = profile;
+    }
+
+    public WrapperPlayer(UserProfile profile, int entityId) {
+        this(
+                profile,
+                entityId,
+                EntityLib.getOptionalApi().isPresent() ?
+                        EntityLib.getApi().getPacketEvents().getServerManager().getVersion() :
+                        PacketEvents.getAPI().getServerManager().getVersion()
+        );
     }
 
     @Override
     protected PacketWrapper<?> createSpawnPacket() {
-        if (EntityLib.getApi().getPacketEvents().getServerManager().getVersion().isOlderThanOrEquals(ServerVersion.V_1_20_1)) {
+        if (serverVersion.isOlderThanOrEquals(ServerVersion.V_1_20_1)) {
             return new WrapperPlayServerSpawnPlayer(
                     getEntityId(),
                     profile.getUUID(),
