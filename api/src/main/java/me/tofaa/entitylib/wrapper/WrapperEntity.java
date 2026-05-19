@@ -530,30 +530,6 @@ public class  WrapperEntity implements Tickable {
         }
     }
 
-    /*
-    // Null means the packet was manually created and wasn't sent by the server itself
-
-        if (buffer == null || ByteBufHelper.refCnt(buffer) == 0) {
-            buffer = ChannelHelper.pooledByteBuf(channel);
-        }
-
-        //On proxies, we must rewrite the packet ID in a format compatible for the targeted client version
-        if (proxy) {
-            User user = PacketEvents.getAPI().getProtocolManager().getUser(channel);
-            if (packetTypeData.getPacketType() == null) {
-                //Get the packet type with the local version packet type mappings.
-                packetTypeData.setPacketType(PacketType.getById(outgoing ? PacketSide.SERVER : PacketSide.CLIENT,
-                        user.getConnectionState(), serverVersion.toClientVersion(), packetTypeData.getNativePacketId()));
-            }
-            //Change local version to user version so that the packet can be processed correctly.
-            serverVersion = user.getClientVersion().toServerVersion();
-            int id = packetTypeData.getPacketType().getId(user.getClientVersion());
-            writeVarInt(id);
-        } else {
-            writeVarInt(packetTypeData.getNativePacketId());
-        }
-        write();
-     */
     private void sendPacket(UUID user, PacketWrapper<?> wrapper) {
         if (wrapper == null) return;
 
@@ -572,10 +548,10 @@ public class  WrapperEntity implements Tickable {
         }
 
         if (EntityLib.getApi().getSettings().shouldUseViaVersionCompatibility() && serverVersion != EntityLib.getApi().getPacketEvents().getServerManager().getVersion()) {
-            // A reference count of 0 means that the packet was freed (it was already sent)
             wrapper.setServerVersion(serverVersion);
             wrapper.setClientVersion(serverVersion.toClientVersion());
 
+            // A reference count of 0 means that the packet was freed (it was already sent)
             if (wrapper.buffer == null || ByteBufHelper.refCnt(wrapper.buffer) == 0) {
                 wrapper.setBuffer(ChannelHelper.pooledByteBuf(channel));
             }
